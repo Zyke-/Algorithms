@@ -190,7 +190,7 @@ public class BinarySearchTree {
 		
 	private int countLeaves(Node n, int c) {
 		if(isLeaf(n))
-			return c = c + 1;
+			return ++c;
 		int cl = 0, cr = 0;
 		if(n.left != null)
 			cl = countLeaves(n.left, c);
