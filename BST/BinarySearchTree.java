@@ -99,11 +99,11 @@ public class BinarySearchTree {
 				System.out.println("X");
 				return;
 		}
-		inorderPrint(n.left, level++); // traverse the left subtree
+		inorderPrint(n.left, level + 1); // traverse the left subtree
 		for(int i=0; i<level; i++) 
 			System.out.print("\t");
 		System.out.println(n.key);
-		inorderPrint(n.right, level++); // traverse the right subtree
+		inorderPrint(n.right, level + 1); // traverse the right subtree
 	}
 	
 	public void printAsString(){
@@ -126,11 +126,11 @@ public class BinarySearchTree {
 	public int rank(int key){		// Rank = n of elements lower than the key
 		return rank(root, key);
 	}
-	private int rank(Node g, int key){
-		if (g == null) return 0;
-		if (g.key == key) return size(g.left);
-		if (g.key < key ) return 1 + size(g.left) + rank(g.right,key);
-		else return rank(g.left, key);
+	private int rank(Node n, int key){
+		if (n == null) return 0;
+		if (n.key == key) return size(n.left);
+		if (n.key < key ) return 1 + size(n.left) + rank(n.right,key);
+		else return rank(n.left, key);
 	}
 
 	public int predecessor(int x){
@@ -144,10 +144,10 @@ public class BinarySearchTree {
 		else return n.key;
 	}
 	
-	public Node insert(Node n, int x) {
-		// if x does not occur in the BST
-		// rooted at g
-		// insert a new node
+	public void insert(int x){
+		root = insert(root, x);
+	}
+	private Node insert(Node n, int x) {
 		if (n == null)
 			return new Node(x);
 		if (x < n.key)
@@ -169,5 +169,39 @@ public class BinarySearchTree {
 		if (x < n.key) n.left = delete(n.left, x);
 		else n.right = delete(n.right, x);
 		return n;
-		}
+	}
+	
+	
+	public int height(){
+		return height(root);
+	}
+	private int height(Node n){
+		if (n == null) return 0;
+	    else		   return 1 + Math.max(height(n.left), height(n.right));	
+	}
+	
+	public int countInner(){
+		return size() - countLeaves();
+	}
+
+	public int countLeaves(){
+		return countLeaves(root, 0);
+	}
+		
+	private int countLeaves(Node n, int c) {
+		if(isLeaf(n))
+			return c = c + 1;
+		int cl = 0, cr = 0;
+		if(n.left != null)
+			cl = countLeaves(n.left, c);
+		if(n.right != null)
+			cr = countLeaves(n.right, c);
+		return c + cr + cl;
+	}
+
+	private boolean isLeaf(Node n){
+		return n.left == null && n.right == null;
+		
+	}
+
 }
