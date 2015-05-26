@@ -194,10 +194,6 @@ public class BinarySearchTree {
 		return countLeaves(root, 0);
 	}
 	
-	public int countLeaves(){
-		return countLeaves(root, 0);
-	}
-		
 	private int countLeaves(Node n, int c) {
 		if(isLeaf(n))
 			return ++c;
