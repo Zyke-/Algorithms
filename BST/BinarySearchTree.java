@@ -181,9 +181,19 @@ public class BinarySearchTree {
 	}
 	
 	public int countInner(){
-		return size() - countLeaves();
+		return coutnInner(root);
+	}
+	
+	private int coutnInner(Node n) {
+		if (n == null || isLeaf(n))
+			return 0;
+		return 1 + coutnInner(n.left) + coutnInner(n.right);
 	}
 
+	public int countLeaves(){
+		return countLeaves(root, 0);
+	}
+	
 	public int countLeaves(){
 		return countLeaves(root, 0);
 	}
@@ -201,7 +211,6 @@ public class BinarySearchTree {
 
 	private boolean isLeaf(Node n){
 		return n.left == null && n.right == null;
-		
 	}
 
 }
