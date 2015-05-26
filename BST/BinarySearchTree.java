@@ -208,5 +208,19 @@ public class BinarySearchTree {
 	private boolean isLeaf(Node n){
 		return n.left == null && n.right == null;
 	}
+	
+	public int whichKey(int rank){
+				
+		return rank;
+	}
+	
+	/* int whichKey(int rank), that returns the key k stored in the BST such
+	that exactly rank values of the BST are less than k. Note that rank is
+	supposed to be less than the number of nodes of the BST.
+	For example:
+	whicKey(0) should return the minimum value stored in the tree; 
+	if the size	of the tree is n, then whichKey(n-1) should return the maximum value
+	stored in the tree;
+	*/
 
 }
